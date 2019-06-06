@@ -31,12 +31,10 @@ const BookSchema = new Schema({
     },
     publicationDate: {
         type: Date,
-        default: Date.now,
         required: true
     },
     image: {
         type: String,
-        //required: true
     },
     author: [{
         type:String,

@@ -85,7 +85,19 @@ exports.view_bookDetails = function(req, res,next) {
 
 //add a new book
 exports.add_a_book = function (req, res,next) {
-    let new_book = new Book(req.body);
+    //let new_book = new Book(req.body);
+    let new_book = new Book({
+      'title':req.body.title,
+      'price':req.body.price,
+      'image':req.body.image,
+      'ISBN':req.body.ISBN,
+      'author':req.body.author,
+      'category':req.body.category,
+      'description':req.body.description,
+      'publicationDate':req.body.publicationDate,
+      'publisher':req.body.publisher,
+      'stock':req.body.stock
+    });
     new_book.save(function (err, book) {
         if (err){
             res.send(err);
@@ -99,7 +111,20 @@ exports.add_a_book = function (req, res,next) {
 
 //edit book details
 exports.edit_bookDetails = function(req, res) {
-    Book.findOneAndUpdate({_id: req.params.bookId}, req.body, {new: true}, function(err, book) {
+    let updated_book=new Book({
+      '_id':req.body._id,
+      'title':req.body.title,
+      'price':req.body.price,
+      'image':req.body.image,
+      'ISBN':req.body.ISBN,
+      'author':req.body.author,
+      'category':req.body.category,
+      'description':req.body.description,
+      'publicationDate':req.body.publicationDate,
+      'publisher':req.body.publisher,
+      'stock':req.body.stock
+    })
+    Book.findOneAndUpdate({_id: req.params.bookId}, updated_book, {new: true}, function(err, book) {
       if (err){
         res.send(err);
       }else{
